@@ -43,6 +43,7 @@ contract OneBadRabbitSale is Ownable {
 
         totalRecruited++;
         accountRecruited[msg.sender]++;
+        lrt.burnFrom(msg.sender, lrtRecruitmentFee);
         oneBadRabbit.recruit(msg.sender);
     }
 
