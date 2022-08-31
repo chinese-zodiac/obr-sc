@@ -40,7 +40,10 @@ contract OneBadRabbitRecruiter is Ownable {
                     accountRecruited[msg.sender] < whitelistRecruitmentCap),
             "OBR: Not whitelist eligible"
         );
-
+        require(
+            lrt.balanceOf(msg.sender) >= lrtRecruitmentFee,
+            "OBR: Not enough LRT"
+        );
         totalRecruited++;
         accountRecruited[msg.sender]++;
         lrt.burnFrom(msg.sender, lrtRecruitmentFee);

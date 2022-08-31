@@ -47,7 +47,7 @@ contract OneBadRabbit is
             _tokenIdTracker.increment();
             newTokenId = _tokenIdTracker.current();
         }
-        require(newTokenId > cap, "OBR: Cannot mint id above cap");
+        require(newTokenId <= cap, "OBR: Cannot mint id above cap");
         _mint(_for, newTokenId);
         _tokenIdTracker.increment();
     }
