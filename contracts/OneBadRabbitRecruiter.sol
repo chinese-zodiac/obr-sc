@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./OneBadRabbit.sol";
 import "./czodiac/LuckyRabbitToken.sol";
 
-contract OneBadRabbitSale is Ownable {
+contract OneBadRabbitRecruiter is Ownable {
     OneBadRabbit public oneBadRabbit;
     LuckyRabbitToken public lrt =
         LuckyRabbitToken(0xE95412D2d374B957ca7f8d96ABe6b6c1148fA438);
@@ -31,7 +31,7 @@ contract OneBadRabbitSale is Ownable {
     function recruitBadRabbit() external {
         require(totalRecruited < globalRecruitmentCap, "OBR: All Recruited");
         require(
-            block.timestamp >= whitelistStartEpoch,
+            block.timestamp >= whitelistStartEpoch && whitelistStartEpoch != 0,
             "OBR: Recruitment not open"
         );
         require(

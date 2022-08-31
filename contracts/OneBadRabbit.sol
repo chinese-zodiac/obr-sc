@@ -16,7 +16,7 @@ contract OneBadRabbit is
 {
     using Counters for Counters.Counter;
 
-    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+    bytes32 public constant RECRUITER_ROLE = keccak256("RECRUITER_ROLE");
 
     Counters.Counter private _tokenIdTracker;
 
@@ -26,7 +26,6 @@ contract OneBadRabbit is
 
     constructor() ERC721("One Bad Rabbit", "1BAD") {
         _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
-        _setupRole(MINTER_ROLE, _msgSender());
     }
 
     /**
@@ -38,9 +37,9 @@ contract OneBadRabbit is
      *
      * Requirements:
      *
-     * - the caller must have the `MINTER_ROLE`.
+     * - the caller must have the `RECRUITER_ROLE`.
      */
-    function recruit(address _for) external onlyRole(MINTER_ROLE) {
+    function recruit(address _for) external onlyRole(RECRUITER_ROLE) {
         // We cannot just use balanceOf to create the new tokenId because tokens
         // can be burned (destroyed), so we need a separate counter.
         uint256 newTokenId = _tokenIdTracker.current();
