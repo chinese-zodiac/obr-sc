@@ -7,6 +7,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/access/AccessControlEnumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract OneBadRabbit is
     Ownable,
@@ -15,6 +16,7 @@ contract OneBadRabbit is
     ERC721Burnable
 {
     using Counters for Counters.Counter;
+    using Strings for uint256;
 
     bytes32 public constant RECRUITER_ROLE = keccak256("RECRUITER_ROLE");
 
@@ -64,7 +66,7 @@ contract OneBadRabbit is
     {
         require(_exists(tokenId), "1BAD: URI query for nonexistent token");
 
-        return string(abi.encodePacked(dat_dir, tokenId, ".json"));
+        return string(abi.encodePacked(dat_dir, tokenId.toString(), ".json"));
     }
 
     function setDatDir(string calldata _to) external onlyOwner {
