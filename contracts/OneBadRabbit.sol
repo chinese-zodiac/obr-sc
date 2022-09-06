@@ -42,6 +42,22 @@ contract OneBadRabbit is
      * - the caller must have the `RECRUITER_ROLE`.
      */
     function recruit(address _for) external onlyRole(RECRUITER_ROLE) {
+        _recruit(_for);
+    }
+
+    function migrateFrom(
+        IERC721Enumerable _oldContract,
+        uint256 _start,
+        uint256 _max
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        uint256 count = _oldContract.totalSupply();
+        if (count > _max) count = _max;
+        for (uint256 i = _start; i < count + _start; i++) {
+            _recruit(_oldContract.ownerOf(i));
+        }
+    }
+
+    function _recruit(address _for) internal {
         // We cannot just use balanceOf to create the new tokenId because tokens
         // can be burned (destroyed), so we need a separate counter.
         uint256 newTokenId = _tokenIdTracker.current();

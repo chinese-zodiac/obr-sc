@@ -22,7 +22,7 @@ async function main() {
     console.log("OneBadRabbit deployed:",obr.address);
 
     const OneBadRabbitRecruiter = await ethers.getContractFactory("OneBadRabbitRecruiter");
-    obrRecruiter = await OneBadRabbitRecruiter.deploy(obr.address);
+    obrRecruiter = await OneBadRabbitRecruiter.deploy(obr.address,55);
     await obrRecruiter.deployed();
     console.log("OneBadRabbitRecruiter deployed:",obrRecruiter.address);
     

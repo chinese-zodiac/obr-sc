@@ -24,8 +24,9 @@ contract OneBadRabbitRecruiter is Ownable {
 
     uint256 public lrtRecruitmentFee = 25 ether;
 
-    constructor(OneBadRabbit _oneBadRabbit) {
+    constructor(OneBadRabbit _oneBadRabbit, uint256 initialRecruited) {
         oneBadRabbit = _oneBadRabbit;
+        totalRecruited = initialRecruited;
     }
 
     function recruitBadRabbit() external {
